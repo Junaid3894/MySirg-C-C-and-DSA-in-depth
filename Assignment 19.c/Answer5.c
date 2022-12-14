@@ -1,31 +1,42 @@
 // write a function to find first occurence of adjacent dublicate value in an array .
 // function has to return a value of the element
 #include<stdio.h>
-int occurence(int *arr,int size,int dub);
+void occurence(int *arr,int size);
 int main()
 {
-   int arr[10];
-   int dublicate;
-   int occu;
+   int arr[7];
    // Taking input from user
-   for(int i=0;i<10;i++)
+   for(int i=0;i<7;i++)
    {
       printf("Enter the %d value of an array :",i+1);
       scanf("%d",&arr[i]);
    }
-   printf("Enter the value which you want find its occurence of dublicate in an array :");
-   scanf("%d",&dublicate);
-   occu = occurence(arr,10,dublicate);
-   printf("Your occurence of %d is %d",dublicate,occu);
+   occurence(arr,7);
    return 0;
 }
-int occurence(int *arr,int size,int dub)
+void occurence(int *arr,int size)
 {
-   int count=0;
+    int arr_count[size];
+    arr_count[0]=0;
+    int count=1;
    for(int i=0;i<size;i++)
    {
-      if(arr[i]==dub)
-         count++;
+    for(int j=i+1;j<size;j++)
+    {
+        if(arr[i]==arr[j])
+        {
+            count++;
+            arr[j]=0;
+        }
+
+    }
+    arr_count[i]=count;
+    count=1;
    }
-   return count-1;
+for(int i=0;i<size;i++)
+{
+    if(arr[i]!=0)
+        if(arr_count[i]>1)
+            printf("%d occurs %d times\n",arr[i],arr_count[i]);
+}
 }
